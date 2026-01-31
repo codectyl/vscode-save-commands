@@ -101,6 +101,11 @@ export default class DragAndDropController implements vscode.TreeDragAndDropCont
 			commands.push(command);
 		}
 
+		// Update sortOrder for all commands to match array index
+		for (let i = 0; i < commands.length; i++) {
+			commands[i].sortOrder = i;
+		}
+
 		await etter.setValue(this.context, commands);
 	}
 
@@ -130,6 +135,11 @@ export default class DragAndDropController implements vscode.TreeDragAndDropCont
 			}
 		} else {
 			folders.push(folder);
+		}
+
+		// Update sortOrder for all folders to match array index
+		for (let i = 0; i < folders.length; i++) {
+			folders[i].sortOrder = i;
 		}
 
 		await etter.setValue(this.context, folders);

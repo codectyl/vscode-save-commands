@@ -89,7 +89,15 @@ class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
 			return false;
 		});
 
-		// TODO: Sort based on sort order
+		// Sort based on sort order
+		const sortFn = (a: TreeItem, b: TreeItem) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
+		filteredItems.sort(sortFn);
+
+		for (const item of items) {
+			if (item.children) {
+				item.children.sort(sortFn);
+			}
+		}
 
 		return filteredItems;
 	}
