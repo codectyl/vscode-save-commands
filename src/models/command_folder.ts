@@ -12,17 +12,20 @@ export class CommandFolder {
 	name!: string;
 	parentFolderId?: string | null;
 	sortOrder?: number;
+	joinWith?: string;
 
 	static create(fields: {
 		name: string;
 		parentFolderId?: string | null;
 		sortOrder?: number;
+		joinWith?: string;
 	}) {
 		return CommandFolder.fromJsonSafe({
 			id: uuidv4(),
 			name: fields.name,
 			parentFolderId: fields.parentFolderId,
 			sortOrder: fields.sortOrder,
+			joinWith: fields.joinWith ?? " && ",
 		});
 	}
 

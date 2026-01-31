@@ -16,8 +16,10 @@ export default function (context: vscode.ExtensionContext) {
 			if (i > -1) {
 				const val = await commandFolderInput({
 					name: folders[i].name,
+					joinWith: folders[i].joinWith,
 				});
 				folders[i].name = val.name;
+				folders[i].joinWith = val.joinWith;
 				etter.setValue(context, folders);
 				vscode.commands.executeCommand(ExecCommands.refreshView);
 			} else {

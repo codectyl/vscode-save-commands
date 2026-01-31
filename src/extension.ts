@@ -16,6 +16,8 @@ import {
 	editFolderFn,
 	exportFn,
 	importFn,
+	runFolderFn,
+	runFolderInActiveTerminalFn,
 } from "./functions";
 import DragAndDropController from "./DragAndDropController";
 
@@ -40,6 +42,8 @@ export function activate(context: vscode.ExtensionContext) {
 		[ExecCommands.editFolder]: editFolderFn(context),
 		[ExecCommands.export]: exportFn(context),
 		[ExecCommands.import]: importFn(context),
+		[ExecCommands.runFolder]: runFolderFn(context),
+		[ExecCommands.runFolderInActiveTerminal]: runFolderInActiveTerminalFn(context),
 	};
 
 	const subscriptions = Object.keys(callbacks).map((key) => {

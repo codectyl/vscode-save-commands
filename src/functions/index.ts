@@ -11,6 +11,8 @@ import deleteFolderFn from "./deleteFolder";
 import editFolderFn from "./editFolder";
 import exportFn from "./export";
 import importFn from "./import";
+import runFolderFn from "./runFolder";
+import runFolderInActiveTerminalFn from "./runFolderInActiveTerminal";
 
 export {
 	deleteCommandFn,
@@ -26,4 +28,6 @@ export {
 	editFolderFn,
 	exportFn,
 	importFn,
+	runFolderFn,
+	runFolderInActiveTerminalFn,
 };

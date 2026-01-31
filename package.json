@@ -157,6 +157,24 @@
           "light": "resources/light/import.svg",
           "dark": "resources/dark/import.svg"
         }
+      },
+      {
+        "command": "save-commands.runFolder",
+        "title": "Try Running Folder Commands",
+        "category": "Save Commands",
+        "icon": {
+          "light": "resources/light/run.svg",
+          "dark": "resources/dark/run.svg"
+        }
+      },
+      {
+        "command": "save-commands.runFolderInActiveTerminal",
+        "title": "Try Running Folder Commands In Active Terminal",
+        "category": "Save Commands",
+        "icon": {
+          "light": "resources/light/run_active.svg",
+          "dark": "resources/dark/run_active.svg"
+        }
       }
     ],
     "views": {
@@ -259,6 +277,16 @@
         },
         {
           "command": "save-commands.editFolder",
+          "when": "view == save-commands-view && viewItem == folder"
+        },
+        {
+          "command": "save-commands.runFolder",
+          "group": "inline",
+          "when": "view == save-commands-view && viewItem == folder"
+        },
+        {
+          "command": "save-commands.runFolderInActiveTerminal",
+          "group": "inline",
           "when": "view == save-commands-view && viewItem == folder"
         },
         {
