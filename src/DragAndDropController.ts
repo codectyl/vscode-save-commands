@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import TreeItem from "./TreeItem";
+import type TreeItem from "./TreeItem";
 import { ContextValue } from "./TreeProvider";
 import Command from "./models/command";
 import { CommandFolder } from "./models/command_folder";
@@ -43,7 +43,7 @@ export default class DragAndDropController implements vscode.TreeDragAndDropCont
 		// Prevent moving between Global and Workspace for now to keep it simple and safe
 		const targetStateType = target?.stateType ?? sourceItem.stateType;
 		if (sourceItem.stateType !== targetStateType) {
-			vscode.window.showWarningMessage("Moving items between Global and Workspace is not supported.");
+			vscode.window.showWarningMessage("Moving items between Global and Workspace is not supported yet.");
 			return;
 		}
 
@@ -90,7 +90,7 @@ export default class DragAndDropController implements vscode.TreeDragAndDropCont
 		command.parentFolderId = newParentFolderId;
 
 		// If dropped on another command or folder, we can try to reorder
-		if (target && target.id && target.contextValue !== ContextValue.root) {
+		if (target?.id && target.contextValue !== ContextValue.root) {
 			const targetIndex = commands.findIndex((c) => c.id === target.id);
 			if (targetIndex !== -1) {
 				commands.splice(targetIndex, 0, command);
@@ -126,7 +126,7 @@ export default class DragAndDropController implements vscode.TreeDragAndDropCont
 		// For now, let's just allow top level or direct parent update
 		folder.parentFolderId = newParentFolderId;
 
-		if (target && target.id && target.contextValue !== ContextValue.root) {
+		if (target?.id && target.contextValue !== ContextValue.root) {
 			const targetIndex = folders.findIndex((f) => f.id === target.id);
 			if (targetIndex !== -1) {
 				folders.splice(targetIndex, 0, folder);
