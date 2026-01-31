@@ -122,25 +122,25 @@ class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
 			globalTree.length !== 0
 				? globalTree
 				: [
-						new TreeItem({
-							id: null,
-							label: "No Commands Found",
-							contextValue: ContextValue.none,
-							stateType: StateType.global,
-						}),
-					];
+					new TreeItem({
+						id: null,
+						label: "No Commands Found",
+						contextValue: ContextValue.none,
+						stateType: StateType.global,
+					}),
+				];
 
 		const workspaceTreeItems: Array<TreeItem> =
 			workspaceTree.length !== 0
 				? workspaceTree
 				: [
-						new TreeItem({
-							id: null,
-							label: "No Commands Found",
-							contextValue: ContextValue.none,
-							stateType: StateType.workspace,
-						}),
-					];
+					new TreeItem({
+						id: null,
+						label: "No Commands Found",
+						contextValue: ContextValue.none,
+						stateType: StateType.workspace,
+					}),
+				];
 
 		this.data = [
 			new TreeItem({
