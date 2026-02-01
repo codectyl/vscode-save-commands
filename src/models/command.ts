@@ -104,9 +104,9 @@ export default class Command {
 				promptText: `${resolveCommandType} | ${this.name} | ${placeholder} | `,
 				placeholder: `Enter ${placeholder}`,
 			});
-			matches[placeholder].forEach((match) => {
+			for (const match of matches[placeholder]) {
 				inputs[match] = input;
-			});
+			}
 		}
 		const resolvedCommand = this.command.replace(regex, (match) => {
 			if (match in inputs) {

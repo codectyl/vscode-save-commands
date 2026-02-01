@@ -178,18 +178,25 @@ export const commandFolderInput = async (defaults?: {
 	name?: string;
 	parentFolderId?: string;
 	sortOrder?: number;
+	joinWith?: string;
 }): Promise<CommandFolder> => {
 	try {
 		const name = (await singleInput({
-			promptText: "Add Folder",
+			promptText: "Folder Name",
 			placeholder: "Folder Name",
 			initialValue: defaults?.name || undefined,
 		})) as string;
+		const joinWith = (await singleInput({
+			promptText: "Join Commands With (default: &&) when running",
+			placeholder: "Eg: &&, ;, |",
+			initialValue: defaults?.joinWith || "&&",
+		})) as string;
 		return Promise.resolve(
 			CommandFolder.create({
-				name: name,
+				name: name.trim(),
 				parentFolderId: defaults?.parentFolderId,
 				sortOrder: defaults?.sortOrder,
+				joinWith: joinWith.trim(),
 			}),
 		);
 	} catch (err) {

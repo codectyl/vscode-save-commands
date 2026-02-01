@@ -2,6 +2,12 @@
 
 All notable changes to the "save-commands" extension will be documented in this file.
 
+## [1.2.0]
+- **Run Folder**: Added ability to run all commands in a folder with a configurable joiner.
+- **Drag and Drop**: Added support for reordering and moving items between folders.
+- **Unit Testing**: Established a comprehensive unit test suite with VS Code API mocking.
+- **Performance**: Improved placeholder resolution logic.
+
 ## [1.0.0]
 - Create Folders
 - Import/Export

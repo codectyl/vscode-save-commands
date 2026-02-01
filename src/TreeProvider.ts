@@ -89,7 +89,15 @@ class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
 			return false;
 		});
 
-		// TODO: Sort based on sort order
+		// Sort based on sort order
+		const sortFn = (a: TreeItem, b: TreeItem) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
+		filteredItems.sort(sortFn);
+
+		for (const item of items) {
+			if (item.children) {
+				item.children.sort(sortFn);
+			}
+		}
 
 		return filteredItems;
 	}
@@ -122,25 +130,25 @@ class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
 			globalTree.length !== 0
 				? globalTree
 				: [
-						new TreeItem({
-							id: null,
-							label: "No Commands Found",
-							contextValue: ContextValue.none,
-							stateType: StateType.global,
-						}),
-					];
+					new TreeItem({
+						id: null,
+						label: "No Commands Found",
+						contextValue: ContextValue.none,
+						stateType: StateType.global,
+					}),
+				];
 
 		const workspaceTreeItems: Array<TreeItem> =
 			workspaceTree.length !== 0
 				? workspaceTree
 				: [
-						new TreeItem({
-							id: null,
-							label: "No Commands Found",
-							contextValue: ContextValue.none,
-							stateType: StateType.workspace,
-						}),
-					];
+					new TreeItem({
+						id: null,
+						label: "No Commands Found",
+						contextValue: ContextValue.none,
+						stateType: StateType.workspace,
+					}),
+				];
 
 		this.data = [
 			new TreeItem({

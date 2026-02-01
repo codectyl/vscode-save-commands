@@ -16,10 +16,14 @@ import {
 	editFolderFn,
 	exportFn,
 	importFn,
+	runFolderFn,
+	runFolderInActiveTerminalFn,
 } from "./functions";
+import DragAndDropController from "./DragAndDropController";
 
 export function activate(context: vscode.ExtensionContext) {
 	const treeView = new TreeDataProvider(context);
+	const treeDnDController = new DragAndDropController(context);
 
 	// biome-ignore lint/suspicious/noExplicitAny: Needed
 	const callbacks: Record<ExecCommands, (...args: any[]) => any> = {
@@ -38,15 +42,20 @@ export function activate(context: vscode.ExtensionContext) {
 		[ExecCommands.editFolder]: editFolderFn(context),
 		[ExecCommands.export]: exportFn(context),
 		[ExecCommands.import]: importFn(context),
+		[ExecCommands.runFolder]: runFolderFn(context),
+		[ExecCommands.runFolderInActiveTerminal]: runFolderInActiveTerminalFn(context),
 	};
 
 	const subscriptions = Object.keys(callbacks).map((key) => {
 		return vscode.commands.registerCommand(key, callbacks[key as ExecCommands]);
 	});
 
-	vscode.window.registerTreeDataProvider("save-commands-view", treeView);
+	vscode.window.createTreeView("save-commands-view", {
+		treeDataProvider: treeView,
+		dragAndDropController: treeDnDController,
+	});
 	context.subscriptions.push(...subscriptions);
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }

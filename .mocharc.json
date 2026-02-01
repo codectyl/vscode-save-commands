@@ -1,7 +1,5 @@
 {
   "extensions": ["ts"],
   "spec": ["src/test/**/*_spec.ts"],
-  "node-option": [
-    "loader=ts-node/esm"
-  ]
+  "require": ["ts-node/register", "src/test/setup.js"]
 }

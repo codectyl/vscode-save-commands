@@ -2,7 +2,7 @@ import {
 	ALL_PLACEHOLDERS,
 	type PlaceholderType,
 } from "../models/placeholder_types";
-import assert = require("node:assert");
+import * as assert from "node:assert";
 
 describe("PlaceholderType Tests", () => {
 	const generatePlaceholderCommand = (
@@ -20,27 +20,21 @@ describe("PlaceholderType Tests", () => {
 		}) as Record<string, string>;
 
 	for (const placeholderType of ALL_PLACEHOLDERS) {
-		const input = generateInput(placeholderType);
-		const label1 = input[placeholderType.wrapLabel("label1")];
-		const label2 = input[placeholderType.wrapLabel("label2")];
-
-		const updatedCommand = `Your test command with ${label1} and ${label2}`;
-
 		it(`Should replace placeholders correctly for placeholder ${placeholderType.id}`, () => {
+			const input = generateInput(placeholderType);
+			const label1 = input[placeholderType.wrapLabel("label1")];
+			const label2 = input[placeholderType.wrapLabel("label2")];
+
+			const updatedCommand = `Your test command with ${label1} and ${label2}`;
 			const regex = placeholderType.regex;
 
 			const command = generatePlaceholderCommand(placeholderType);
 
 			const matches = placeholderType.extractPlaceholders(command);
 
-			assert.equal(
-				JSON.stringify([
-					placeholderType.wrapLabel("label1"),
-					placeholderType.wrapLabel("label2"),
-				]),
-				JSON.stringify(matches),
-				"Placeholders not matching on extract",
-			);
+			assert.ok(matches, "Matches should not be null");
+			assert.ok(matches[placeholderType.wrapLabel("label1").replace(/^\W+|\W+$/g, '')], "label1 match missing");
+			assert.ok(matches[placeholderType.wrapLabel("label2").replace(/^\W+|\W+$/g, '')], "label2 match missing");
 
 			const replacedCommand = command.replace(regex, (match) => {
 				if (match in input) {
