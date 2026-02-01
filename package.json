@@ -358,7 +358,7 @@
     "url": "https://github.com/codectyl/vscode-save-commands"
   },
   "license": "MIT",
-  "publisher": "codectyl",
+  "publisher": "deepakgupta191199",
   "dependencies": {
     "class-transformer": "^0.5.1",
     "reflect-metadata": "^0.1.13"
